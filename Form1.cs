@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-using Emgu;
-using Emgu.CV;
-using Emgu.CV.Util;
+﻿using Emgu.CV;
 using Emgu.CV.OCR;
 using Emgu.CV.Structure;
-using Emgu.Util;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace RecogTxt
 {
@@ -49,19 +39,19 @@ namespace RecogTxt
                 {
                     throw new Exception("Картинка не выбрана");
                 }
-                else if(toolStripComboBox1.SelectedItem== null)
+                else if (toolStripComboBox1.SelectedItem == null)
                 {
                     throw new Exception("Язык не выбран");
                 }
                 else
                 {
-                    Tesseract tesseract = new Tesseract(@"C:\Users\SP\Documents\testdata",lang,OcrEngineMode.TesseractLstmCombined);
+                    Tesseract tesseract = new Tesseract(@"C:\Users\SP\Documents\testdata", lang, OcrEngineMode.TesseractLstmCombined);
                     tesseract.SetImage(new Image<Bgr, byte>(filePath));
                     tesseract.Recognize();
                     richTextBox1.Text = tesseract.GetUTF8Text();
                     tesseract.Dispose();
                 }
-                 
+
             }
             catch (Exception ex)
             {
@@ -76,5 +66,7 @@ namespace RecogTxt
             if (toolStripComboBox1.SelectedIndex == 1)
                 lang = "eng";
         }
+
+
     }
 }
